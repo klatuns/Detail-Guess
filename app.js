@@ -12,11 +12,12 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
   var predname = req.body.name;
-
-  https.get("https://api.genderize.io/?name=" + predname, function (response) {
+  let gender = "https://api.genderize.io/?name=";
+  let possible_country = "https://api.nationalize.io/?name";
+  https.get(gender + predname, function (response) {
     response.on("data", function (data) {
       const names = JSON.parse(data);
-      console.log(names);
+
       const predname = names.name;
       const predgender = names.gender;
       const predprobability = names.probability * 100;
